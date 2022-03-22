@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tictest/aleert_dialog.dart';
 import 'package:tictest/constant.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -132,6 +133,114 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+//function that get called when user tap the container
+ void _tapped(int index) {
+    setState(() {
+      if (_turnOfO && _xOrOList[index] == '') {
+        _xOrOList[index] = 'o';
+        _filledBoxes += 1;
+      } else if (!_turnOfO && _xOrOList[index] == '') {
+        _xOrOList[index] = 'x';
+        _filledBoxes += 1;
+      }
+
+      _turnOfO = !_turnOfO;
+      _checkTheWinner();
+    });
+  }
+
+  //function to check the winner
+  void _checkTheWinner() {
+    // check first row
+    if (_xOrOList[0] == _xOrOList[1] &&
+        _xOrOList[0] == _xOrOList[2] &&
+        _xOrOList[0] != '') {
+      _showAlertDialog('Winner', _xOrOList[0]);
+      return;
+    }
+
+    // check second row
+    if (_xOrOList[3] == _xOrOList[4] &&
+        _xOrOList[3] == _xOrOList[5] &&
+        _xOrOList[3] != '') {
+      _showAlertDialog('Winner', _xOrOList[3]);
+      return;
+    }
+
+    // check third row
+    if (_xOrOList[6] == _xOrOList[7] &&
+        _xOrOList[6] == _xOrOList[8] &&
+        _xOrOList[6] != '') {
+      _showAlertDialog('Winner', _xOrOList[6]);
+      return;
+    }
+
+    // check first column
+    if (_xOrOList[0] == _xOrOList[3] &&
+        _xOrOList[0] == _xOrOList[6] &&
+        _xOrOList[0] != '') {
+      _showAlertDialog('Winner', _xOrOList[0]);
+      return;
+    }
+
+    // check second column
+    if (_xOrOList[1] == _xOrOList[4] &&
+        _xOrOList[1] == _xOrOList[7] &&
+        _xOrOList[1] != '') {
+      _showAlertDialog('Winner', _xOrOList[1]);
+      return;
+    }
+
+    // check third column
+    if (_xOrOList[2] == _xOrOList[5] &&
+        _xOrOList[2] == _xOrOList[8] &&
+        _xOrOList[2] != '') {
+      _showAlertDialog('Winner', _xOrOList[2]);
+      return;
+    }
+
+    // check diagonal
+    if (_xOrOList[0] == _xOrOList[4] &&
+        _xOrOList[0] == _xOrOList[8] &&
+        _xOrOList[0] != '') {
+      _showAlertDialog('Winner', _xOrOList[0]);
+      return;
+    }
+
+    // check diagonal
+    if (_xOrOList[2] == _xOrOList[4] &&
+        _xOrOList[2] == _xOrOList[6] &&
+        _xOrOList[2] != '') {
+      _showAlertDialog('Winner', _xOrOList[2]);
+      return;
+    }
+
+    if (_filledBoxes == 9) {
+      _showAlertDialog('Draw', '');
+    }
+  }
+
+
+   void _showAlertDialog(String title, String winner) {
+    showAlertDialog(
+        context: context,
+        title: title,
+        content: winner == ''
+            ? 'The match ended in a draw'
+            : 'The winner is ${winner.toUpperCase()}',
+        defaultActionText: 'OK',
+        onOkPressed: () {
+          _clearBoard();
+          Navigator.of(context).pop();
+        });
+
+    if (winner == 'o') {
+      _scoreO += 1;
+    } else if (winner == 'x') {
+      _scoreX += 1;
+    }
   }
 
  void _clearBoard() {
