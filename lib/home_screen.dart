@@ -2,6 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:tictest/aleert_dialog.dart';
 import 'package:tictest/constant.dart';
 
+
+class Test extends StatefulWidget {
+  @override
+  _TestState createState() => _TestState();
+}
+
+class _TestState extends State<Test> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({ Key? key }) : super(key: key);
 
@@ -49,8 +62,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: [
           _buildPointsTable(),
-          _buildTurn()
-
+          _buildGrid(),
+          _buildTurn(),
         ],
       ),
 
