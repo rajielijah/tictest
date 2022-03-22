@@ -45,9 +45,80 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       backgroundColor: Colors.grey[900],
+      body: Column(
+        children: [
+          _buildPointsTable()
+
+        ],
+      ),
 
     );
   }
+
+  Widget _buildPointsTable() {
+    return Expanded(
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(
+                20.0,
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    'Player O',
+                    style: kCustomText(
+                        fontSize: 22.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    _scoreO.toString(),
+                    style: kCustomText(
+                        color: Colors.white,
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(
+                20.0,
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    'Player X',
+                    style: kCustomText(
+                        fontSize: 22.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    _scoreX.toString(),
+                    style: kCustomText(
+                        color: Colors.white,
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
 
  void _clearBoard() {
     setState(() {
