@@ -57,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+//widget that keeps score
   Widget _buildPointsTable() {
     return Expanded(
       child: Container(
@@ -135,7 +136,41 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-//function that get called when user tap the container
+  
+//Widget for the Grid user will play the game
+ Widget _buildGrid() {
+    return Expanded(
+      flex: 3,
+      child: GridView.builder(
+          itemCount: 9,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+          ),
+          itemBuilder: (BuildContext context, int index) {
+            return GestureDetector(
+              onTap: () {
+                _tapped(index);
+              },
+              child: Container(
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.grey)),
+                child: Center(
+                  child: Text(
+                    _xOrOList[index],
+                    style: TextStyle(
+                      color:
+                          _xOrOList[index] == 'x' ? Colors.white : Colors.red,
+                      fontSize: 40,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }),
+    );
+  }
+
+  //function that get called when user tap the container
  void _tapped(int index) {
     setState(() {
       if (_turnOfO && _xOrOList[index] == '') {
@@ -150,6 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _checkTheWinner();
     });
   }
+
 
   //function to check the winner
   void _checkTheWinner() {
