@@ -47,7 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.grey[900],
       body: Column(
         children: [
-          _buildPointsTable()
+          _buildPointsTable(),
+          _buildTurn()
 
         ],
       ),
@@ -119,6 +120,19 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+    Widget _buildTurn() {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: Text(
+            _turnOfO ? 'Turn of O' : 'Turn of X',
+            style: kCustomText(color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
 
  void _clearBoard() {
     setState(() {
